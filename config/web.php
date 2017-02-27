@@ -42,8 +42,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'admin/blog/categories' => 'blog/admin/categories',
-                //'blog/admin/categories' => 'blog/admin/categories',
+                'admin/<module:[\w-]+>/<controller:[\w-]+>' => '<module>/admin/<controller>',
+                'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>' => '<module>/admin/<controller>/<action>',
+
                 '/' => 'site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',
