@@ -15,9 +15,12 @@ class AdminController extends Controller
             }
         }
 
+        \Yii::$app->homeUrl = '/admin/';
+
         $this->layout = '/admin/main';
 
-        return parent::beforeAction($action);
+        $result = parent::beforeAction($action);
+        return $result;
     }
 
 }

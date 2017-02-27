@@ -56,6 +56,7 @@ AdminAsset::register($this);
     ?>
 
     <div class="container">
+        <?php //Breadcrumbs::$homeLink = '/zz'; ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
