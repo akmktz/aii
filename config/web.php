@@ -42,7 +42,11 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/admin/' => 'admin/default/index',
+                '/admin/login' => 'admin/default/login',
+                '/admin/logout' => 'admin/default/logout',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>' => '<module>/admin/<controller>',
+                //'admin/<action:[\w]+>' => 'admin/default/<action>',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>' => '<module>/admin/<controller>/<action>',
 
                 '/' => 'site/index',
@@ -54,6 +58,9 @@ $config = [
     ],
     'params' => $params,
     'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
         'blog' => [
             'class' => 'app\modules\blog\Module',
         ],

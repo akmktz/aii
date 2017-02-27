@@ -5,15 +5,22 @@ namespace app\modules\blog\controllers\admin;
 use Yii;
 use app\modules\blog\models\Categories;
 use app\modules\blog\models\CategoriesSearch;
-use yii\web\Controller;
+use app\CMS\AdminController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * CategoriesController implements the CRUD actions for Categories model.
  */
-class CategoriesController extends Controller
+class CategoriesController extends AdminController
 {
+
+    //public function beforeAction($action)
+    //{
+    //    $this->layout = '/admin/main';
+    //    return parent::beforeAction($action);
+    //}
+
     /**
      * @inheritdoc
      */
