@@ -38,14 +38,18 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'admin/blog/categories' => 'blog/admin/categories',
+                //'blog/admin/categories' => 'blog/admin/categories',
+                '/' => 'site/index',
+                'about' => 'site/about',
+                'contact' => 'site/contact',
+                'login' => 'site/login',
             ],
         ],
-        */
     ],
     'params' => $params,
     'modules' => [

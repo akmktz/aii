@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\blog\controllers;
+namespace app\modules\blog\controllers\admin;
 
 use Yii;
 use app\modules\blog\models\Categories;
@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AdminCategoriesController implements the CRUD actions for Categories model.
+ * CategoriesController implements the CRUD actions for Categories model.
  */
-class AdminCategoriesController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * @inheritdoc
