@@ -23,15 +23,102 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'name',
+                'format' => 'html',
+                'value' => function($data) {
+                    return Html::a(
+                        \yii\helpers\StringHelper::truncate(strip_tags($data->name), 30, '...'),
+                        ['view', 'id' => $data->id]
+                    );
+                }
+            ],
+            [
+                'attribute' => 'alias',
+                'filter' => false,
+                'enableSorting' => false,
+                'format' => 'ntext',
+            ],
+            [
+                'attribute' => 'text',
+                'enableSorting' => false,
+                'format' => 'html',
+                'value' => function($data) {
+                    return Html::a(
+                        \yii\helpers\StringHelper::truncate(strip_tags($data->text), 47, '...'),
+                        ['view', 'id' => $data->id]
+                    );
+                }
+            ],
+            //[
+            //    'attribute' => 'published',
+            //    'filter' => [1 => 'Да', 0 => 'Нет'],
+            //    'contentOptions' => ['align' => 'center'],
+            //    'format' => 'raw',
+            //    'value' => function($data) {
+            //        return Html::a(
+            //                //$data->published ? 'Да' : 'Нет',
+            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
+            //                    ($data->published ? 'ok-circle text-success' : 'ban-circle text-warning')]),
+            //                '#',
+            //                ['class' => 'js-publish-change-link', 'data-id' => $data->id]
+            //            );
+            //    }
+            //],
+            [
+                'attribute' => 'publish_date',
+                'format' => ['date', 'php:d.m.Y'],
+             ],
+            //[
+            //    'class' => 'yii\grid\ActionColumn',
+            //    'template' => '{status} {update} {delete}',
+            //    'buttons' => [
+            //        'update' => function ($url, $data) {
+            //            return Html::a(
+            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
+            //                $url,
+            //                ['class' => 'text-info']
+            //            );
+            //        },
+            //        'delete' => function ($url, $data) {
+            //            return Html::a(
+            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-trash']),
+            //                $url,
+            //                ['class' => 'text-danger']
+            //            );
+            //        }
+            //    ],
+            //],
+            [
+                'attribute' => 'published',
+                'filter' => [1 => 'Да', 0 => 'Нет'],
+                'contentOptions' => ['align' => 'center', 'class' => 'a-buttons-container'],
+                'format' => 'raw',
+                'value' => function($data) {
+                    return
+                        Html::a(
+                            Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
+                                ($data->published ? 'ok-circle text-success' : 'ban-circle text-warning')]),
+                            '#',
+                            ['class' => 'js-publish-change-link', 'data-id' => $data->id]
+                        ) . Html::a(
+                            Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
+                            ['update', 'id' => $data->id],
+                            ['class' => 'text-info']
+                        ) . Html::a(
+                            Html::tag('span', null, ['class' => 'glyphicon glyphicon-trash']),
+                            ['delete', 'id' => $data->id],
+                            [
+                                'class' => 'text-danger',
+                                'data' => [
+                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'method' => 'post',
+                                ],
+                            ]
+                        );
+                }
+            ],
 
-            'id',
-            'name',
-            'alias',
-            'text:ntext',
-            'published',
-            // 'publish_date',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

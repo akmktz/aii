@@ -48,6 +48,7 @@ $config = [
                 '/admin/logout' => 'admin/default/logout',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>' => '<module>/admin/<controller>',
                 //'admin/<action:[\w]+>' => 'admin/default/<action>',
+                'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>/<id>' => '<module>/admin/<controller>/<action>',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>' => '<module>/admin/<controller>/<action>',
 
                 '/' => 'site/index',

@@ -21,13 +21,13 @@ use yii\widgets\ActiveForm;
     <div class="form-group field-categories-alias required">
         <?= Html::label('Алиас', 'alias'); ?>
         <div class="input-group">
-            <?= Html::textInput('alias', $model->alias, ['maxlength' => true, 'class' => 'form-control js-alias-generate-alias']); ?>
+            <?= Html::textInput($model->formName() . '[alias]', $model->alias, ['maxlength' => true, 'class' => 'form-control js-alias-generate-alias']); ?>
             <span class="input-group-btn">
                 <?= Html::button('Сгенерировать', ['class' => 'btn btn-flat js-alias-generate-btn']) ?>
             </span>
         </div>
     </div>
-    <?//= $form->field($model, 'alias')->->textInput(['maxlength' => true]) ?>
+    <?//= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 

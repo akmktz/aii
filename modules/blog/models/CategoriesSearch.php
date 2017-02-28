@@ -59,11 +59,29 @@ class CategoriesSearch extends Categories
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'id'        => $this->id,
             'published' => $this->published,
-            'publish_date' => $this->publish_date,
+            //'publish_date' => [$this->publish_date],
         ]);
 
+        $this->publish_date = trim($this->publish_date);
+
+        if (preg_match('/^\d{1,2}\.\d{1,2}\.\d{2,4}$/', $this->publish_date)
+            && $date = \DateTime::createFromFormat('d.m.Y', $this->publish_date))
+        {
+            $query->andFilterWhere(['>=', 'publish_date', $date->format('Y-m-d 00:00:00')])
+                  ->andFilterWhere(['<=', 'publish_date', $date->format('Y-m-d 23:59:59')]);
+        }
+        if (preg_match('/^\d{1,2}\.\d{1,2}\.\d{2,4}\s*-\s*\d{1,2}\.\d{1,2}\.\d{2,4}$/', $this->publish_date)
+            && count($date = explode('-', $this->publish_date, 2)) == 2)
+        {
+            if (($date1 = \DateTime::createFromFormat('d.m.Y', trim($date[0])))
+                && ($date2 = \DateTime::createFromFormat('d.m.Y', trim($date[1]))))
+            {
+                $query->andFilterWhere(['>=', 'publish_date', $date1->format('Y-m-d 00:00:00')])
+                    ->andFilterWhere(['<=', 'publish_date', $date2->format('Y-m-d 23:59:59')]);
+            }
+        }
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'alias', $this->alias])
             ->andFilterWhere(['like', 'text', $this->text]);
