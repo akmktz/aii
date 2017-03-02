@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\datetimepicker\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\blog\models\Categories */
@@ -14,14 +15,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?= $form->field($model, 'date')->textInput() ?>
+    <?php //= $form->field($model, 'date')->textInput() ?>
 
-    <?php //= $form->field($model, 'date')->widget(DateTimePicker::classname(), [
-    //    'options' => ['placeholder' => 'Enter event time ...'],
-    //    'pluginOptions' => [
-    //        'autoclose' => true
-    //    ]
-    //]); ?>
+    <?= $form->field($model, 'date')->widget(DateTimePicker::className(), [
+        'language' => 'ru',
+        'size' => 'ms',
+        'template' => '{input}',
+        'pickButtonIcon' => 'glyphicon glyphicon-time',
+        'inline' => false,
+        'clientOptions' => [
+            'startView' => 2,
+            'minView' => 2,
+            'maxView' => 2,
+            'autoclose' => true,
+            'format' => 'dd.mm.yyyy hh:ii:ss', // if inline = false
+            'todayBtn' => true
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true , 'class' => 'form-control js-alias-generate-source']) ?>
 

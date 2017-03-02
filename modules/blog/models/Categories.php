@@ -36,7 +36,7 @@ class Categories extends ActiveRecord
             [['name', 'alias'], 'required'],
             [['text'], 'string'],
             [['status'], 'integer'],
-            [['date'], 'datetime', 'format' => 'php:d.m.Y H:i:s'],
+            [['date'], 'date', 'format' => 'php:d.m.Y H:i:s'],
             [['name'], 'string', 'max' => 255],
             [['alias'], 'string', 'max' => 50],
             [['alias'], 'unique'],
