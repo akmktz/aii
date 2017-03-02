@@ -2,7 +2,8 @@
 
 namespace app\modules\blog\models;
 
-use Yii;
+use \yii\db\ActiveRecord;
+use yii\behaviors\AttributeBehavior;
 
 /**
  * This is the model class for table "blog_categories".
@@ -16,7 +17,7 @@ use Yii;
  *
  * @property BlogPosts[] $blogPosts
  */
-class Categories extends \yii\db\ActiveRecord
+class Categories extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -34,12 +35,43 @@ class Categories extends \yii\db\ActiveRecord
         return [
             [['name', 'alias'], 'required'],
             [['text'], 'string'],
-            [['published'], 'integer'],
-            [['publish_date'], 'safe'],
+            [['status'], 'integer'],
+            [['date'], 'datetime', 'format' => 'php:d.m.Y H:i:s'],
             [['name'], 'string', 'max' => 255],
             [['alias'], 'string', 'max' => 50],
             [['alias'], 'unique'],
         ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'date',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
+                    ActiveRecord::EVENT_AFTER_FIND => 'date',
+                ],
+                'value' => function ($event) {
+                    if ($event->name == 'afterFind') {
+                        return \DateTime::createFromFormat('Y-m-d H:i:s',$event->sender->attributes['date'])
+                            ->format('d.m.Y H:i:s');
+                    } else {
+                        return \DateTime::createFromFormat('d.m.Y H:i:s',$event->sender->attributes['date'])
+                            ->format('Y-m-d H:i:s');
+                    }
+                },
+            ],
+        ];
+    }
+
+    public function getDate() {
+        return \DateTime::createFromFormat('Y-m-d H:i:s', $this->date)->format('d.m.Y H:i:s');
+    }
+
+    public function setDate($date) {
+        $this->date = \DateTime::createFromFormat('d.m.Y H:i:s', $date)->format('Y-m-d H:i:s');
     }
 
     /**
@@ -52,8 +84,8 @@ class Categories extends \yii\db\ActiveRecord
             'name' => 'Наименование',
             'alias' => 'Алиас',
             'text' => 'Описание',
-            'published' => 'Опубликовано',
-            'publish_date' => 'Дата публикации',
+            'status' => 'Опубликовано',
+            'date' => 'Дата публикации',
         ];
     }
 

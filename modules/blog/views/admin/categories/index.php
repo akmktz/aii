@@ -51,22 +51,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             //[
-            //    'attribute' => 'published',
+            //    'attribute' => 'status',
             //    'filter' => [1 => 'Да', 0 => 'Нет'],
             //    'contentOptions' => ['align' => 'center'],
             //    'format' => 'raw',
             //    'value' => function($data) {
             //        return Html::a(
-            //                //$data->published ? 'Да' : 'Нет',
+            //                //$data->status ? 'Да' : 'Нет',
             //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
-            //                    ($data->published ? 'ok-circle text-success' : 'ban-circle text-warning')]),
+            //                    ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]),
             //                '#',
             //                ['class' => 'js-publish-change-link', 'data-id' => $data->id]
             //            );
             //    }
             //],
             [
-                'attribute' => 'publish_date',
+                'attribute' => 'date',
                 'format' => ['date', 'php:d.m.Y'],
              ],
             //[
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //    ],
             //],
             [
-                'attribute' => 'published',
+                'attribute' => 'status',
                 'filter' => [1 => 'Да', 0 => 'Нет'],
                 'contentOptions' => ['align' => 'center', 'class' => 'a-buttons-container'],
                 'format' => 'raw',
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return
                         Html::a(
                             Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
-                                ($data->published ? 'ok-circle text-success' : 'ban-circle text-warning')]),
+                                ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]),
                             '#',
                             ['class' => 'js-publish-change-link', 'data-id' => $data->id]
                         ) . Html::a(

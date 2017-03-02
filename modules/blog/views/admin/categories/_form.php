@@ -12,9 +12,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'published')->checkbox() ?>
+    <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?= $form->field($model, 'publish_date')->textInput() ?>
+    <?= $form->field($model, 'date')->textInput() ?>
+
+    <?php //= $form->field($model, 'date')->widget(DateTimePicker::classname(), [
+    //    'options' => ['placeholder' => 'Enter event time ...'],
+    //    'pluginOptions' => [
+    //        'autoclose' => true
+    //    ]
+    //]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true , 'class' => 'form-control js-alias-generate-source']) ?>
 
@@ -27,7 +34,7 @@ use yii\widgets\ActiveForm;
             </span>
         </div>
     </div>
-    <?//= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
+    <?php  //= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
