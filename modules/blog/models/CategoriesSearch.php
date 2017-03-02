@@ -69,8 +69,8 @@ class CategoriesSearch extends Categories
         if (preg_match('/^\d{1,2}\.\d{1,2}\.\d{2,4}$/', $this->date)
             && $date = \DateTime::createFromFormat('d.m.Y', $this->date))
         {
-            $query->andFilterWhere(['>=', 'date', $date->format('d-m-Y 00:00:00')])
-                  ->andFilterWhere(['<=', 'date', $date->format('d-m-Y 23:59:59')]);
+            $query->andFilterWhere(['>=', 'date', $date->format('Y-m-d')])
+                  ->andFilterWhere(['<=', 'date', $date->format('Y-m-d')]);
         }
         if (preg_match('/^\d{1,2}\.\d{1,2}\.\d{2,4}\s*-\s*\d{1,2}\.\d{1,2}\.\d{2,4}$/', $this->date)
             && count($date = explode('-', $this->date, 2)) == 2)
@@ -78,8 +78,8 @@ class CategoriesSearch extends Categories
             if (($date1 = \DateTime::createFromFormat('d.m.Y', trim($date[0])))
                 && ($date2 = \DateTime::createFromFormat('d.m.Y', trim($date[1]))))
             {
-                $query->andFilterWhere(['>=', 'date', $date1->format('d-m-Y 00:00:00')])
-                    ->andFilterWhere(['<=', 'date', $date2->format('d-m-Y 23:59:59')]);
+                $query->andFilterWhere(['>=', 'date', $date1->format('Y-m-d')])
+                    ->andFilterWhere(['<=', 'date', $date2->format('Y-m-d')]);
             }
         }
         $query->andFilterWhere(['like', 'name', $this->name])

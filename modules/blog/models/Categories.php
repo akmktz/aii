@@ -36,7 +36,7 @@ class Categories extends ActiveRecord
             [['name', 'alias'], 'required'],
             [['text'], 'string'],
             [['status'], 'integer'],
-            [['date'], 'date', 'format' => 'php:d.m.Y H:i:s'],
+            [['date'], 'date', 'format' => 'php:d.m.Y'],
             [['name'], 'string', 'max' => 255],
             [['alias'], 'string', 'max' => 50],
             [['alias'], 'unique'],
@@ -51,27 +51,17 @@ class Categories extends ActiveRecord
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => 'date',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'date',
-                    ActiveRecord::EVENT_AFTER_FIND => 'date',
+                    ActiveRecord::EVENT_AFTER_FIND    => 'date',
                 ],
                 'value' => function ($event) {
                     if ($event->name == 'afterFind') {
-                        return \DateTime::createFromFormat('Y-m-d H:i:s',$event->sender->attributes['date'])
-                            ->format('d.m.Y H:i:s');
+                        return \DateTime::createFromFormat('Y-m-d',$event->sender->attributes['date'])->format('d.m.Y');
                     } else {
-                        return \DateTime::createFromFormat('d.m.Y H:i:s',$event->sender->attributes['date'])
-                            ->format('Y-m-d H:i:s');
+                        return \DateTime::createFromFormat('d.m.Y',$event->sender->attributes['date'])->format('Y-m-d');
                     }
                 },
             ],
         ];
-    }
-
-    public function getDate() {
-        return \DateTime::createFromFormat('Y-m-d H:i:s', $this->date)->format('d.m.Y H:i:s');
-    }
-
-    public function setDate($date) {
-        $this->date = \DateTime::createFromFormat('d.m.Y H:i:s', $date)->format('Y-m-d H:i:s');
     }
 
     /**

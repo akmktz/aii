@@ -28,7 +28,7 @@ use dosamigos\datetimepicker\DateTimePicker;
             'minView' => 2,
             'maxView' => 2,
             'autoclose' => true,
-            'format' => 'dd.mm.yyyy hh:ii:ss', // if inline = false
+            'format' => 'dd.mm.yyyy',
             'todayBtn' => true
         ]
     ]); ?>
