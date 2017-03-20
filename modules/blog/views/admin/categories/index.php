@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Categories', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать категорию', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data) {
                     return Html::a(
                         \yii\helpers\StringHelper::truncate(strip_tags($data->name), 30, '...'),
-                        ['view', 'id' => $data->id]
+                        ['update', 'id' => $data->id]
                     );
                 }
             ],
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data) {
                     return Html::a(
                         \yii\helpers\StringHelper::truncate(strip_tags($data->text), 47, '...'),
-                        ['view', 'id' => $data->id]
+                        ['update', 'id' => $data->id]
                     );
                 }
             ],
