@@ -4,25 +4,45 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\blog\models\CategoriesSearch */
+/* @var $searchModel app\modules\blog\models\PostsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Posts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="categories-index">
+<div class="posts-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Новая категория', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Новый пост', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            //'category',
+            [
+                'filter' => $categories,
+                'attribute' => 'category',
+                'format' => 'raw',
+                'value' => function($data) {
+                    return $data->category0->name;
+                }
+            ],
+            //[
+            //    'attribute' => 'category',
+            //    'format' => 'html',
+            //    'value' => function($data) {
+            //        return Html::a(
+            //            \yii\helpers\StringHelper::truncate(strip_tags($data->category), 30, '...'),
+            //            ['update', 'id' => $data->id]
+            //        );
+            //    }
+            //],
             [
                 'attribute' => 'name',
                 'format' => 'html',
@@ -50,45 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     );
                 }
             ],
-            //[
-            //    'attribute' => 'status',
-            //    'filter' => [1 => 'Да', 0 => 'Нет'],
-            //    'contentOptions' => ['align' => 'center'],
-            //    'format' => 'raw',
-            //    'value' => function($data) {
-            //        return Html::a(
-            //                //$data->status ? 'Да' : 'Нет',
-            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
-            //                    ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]),
-            //                '#',
-            //                ['class' => 'js-publish-change-link', 'data-id' => $data->id]
-            //            );
-            //    }
-            //],
             [
                 'attribute' => 'date',
                 'format' => ['date', 'php:d.m.Y'],
-             ],
-            //[
-            //    'class' => 'yii\grid\ActionColumn',
-            //    'template' => '{status} {update} {delete}',
-            //    'buttons' => [
-            //        'update' => function ($url, $data) {
-            //            return Html::a(
-            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
-            //                $url,
-            //                ['class' => 'text-info']
-            //            );
-            //        },
-            //        'delete' => function ($url, $data) {
-            //            return Html::a(
-            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-trash']),
-            //                $url,
-            //                ['class' => 'text-danger']
-            //            );
-            //        }
-            //    ],
-            //],
+            ],
+            'tags',
             [
                 'attribute' => 'status',
                 'filter' => [1 => 'Да', 0 => 'Нет'],
@@ -121,4 +107,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]); ?>
+    <?php //= GridView::widget([
+    //    'dataProvider' => $dataProvider,
+    //    'filterModel' => $searchModel,
+    //    'columns' => [
+    //        ['class' => 'yii\grid\SerialColumn'],
+    //
+    //        'id',
+    //        'name',
+    //        'alias',
+    //        'text:ntext',
+    //        'status',
+    //        'date',
+    //        'category',
+    //        'tags',
+    //
+    //        ['class' => 'yii\grid\ActionColumn'],
+    //    ],
+    //]); ?>
 </div>

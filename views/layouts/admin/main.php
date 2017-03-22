@@ -37,7 +37,8 @@ AdminAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/admin/']],
-            ['label' => 'Blog', 'url' => ['/admin/blog/categories']],
+            ['label' => 'Категории', 'url' => ['/admin/blog/categories']],
+            ['label' => 'Посты', 'url' => ['/admin/blog/posts']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/admin/login']]
             ) : (

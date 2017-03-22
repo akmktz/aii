@@ -2,29 +2,32 @@
 
 namespace app\modules\blog\models;
 
-use \yii\db\ActiveRecord;
+use Yii;
 use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "blog_categories".
+ * This is the model class for table "blog_posts".
  *
  * @property integer $id
  * @property string $name
  * @property string $alias
  * @property string $text
- * @property integer $published
- * @property string $publish_date
+ * @property integer $status
+ * @property string $date
+ * @property integer $category
+ * @property string $tags
  *
- * @property Posts[] $posts
+ * @property Categories $category0
  */
-class Categories extends ActiveRecord
+class Posts extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'blog_categories';
+        return 'blog_posts';
     }
 
     /**
@@ -33,12 +36,13 @@ class Categories extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'alias'], 'required'],
+            [['name', 'alias', 'category'], 'required'],
             [['text'], 'string'],
-            [['status'], 'integer'],
-            [['date'], 'date', 'format' => 'php:d.m.Y'],
-            [['name', 'alias'], 'string', 'min' => 3, 'max' => 255],
+            [['status', 'category'], 'integer'],
+            [['date'], 'safe'],
+            [['name', 'alias', 'tags'], 'string', 'max' => 255],
             [['alias'], 'unique'],
+            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'id']],
         ];
     }
 
@@ -72,17 +76,19 @@ class Categories extends ActiveRecord
             'id' => 'Id',
             'name' => 'Наименование',
             'alias' => 'Алиас',
-            'text' => 'Описание',
-            'status' => 'Опубликовано',
+            'text' => 'Текст',
+            'status' => 'Публикация',
             'date' => 'Дата публикации',
+            'category' => 'Категория',
+            'tags' => 'Теги',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPosts()
+    public function getCategory0()
     {
-        return $this->hasMany(Posts::className(), ['category' => 'id']);
+        return $this->hasOne(Categories::className(), ['id' => 'category']);
     }
 }
