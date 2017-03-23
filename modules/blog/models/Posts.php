@@ -36,11 +36,11 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'alias', 'category'], 'required'],
-            [['text'], 'string'],
+            [['name', 'alias', 'category', 'date', 'text'], 'required'],
+            [['tags'], 'string'],
             [['status', 'category'], 'integer'],
-            [['date'], 'safe'],
-            [['name', 'alias', 'tags'], 'string', 'max' => 255],
+            [['date'], 'date', 'format' => 'php:d.m.Y'],
+            [['name', 'alias', 'text'], 'string', 'min' => 3, 'max' => 255],
             [['alias'], 'unique'],
             [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'id']],
         ];
@@ -90,5 +90,16 @@ class Posts extends \yii\db\ActiveRecord
     public function getCategory0()
     {
         return $this->hasOne(Categories::className(), ['id' => 'category']);
+    }
+
+    public function listCategories()
+    {
+        $result = [null => '-- Не указана --'];
+        $temp = Categories::find()->orderBy('name')->all();
+        foreach ($temp as $obj) {
+            $result[$obj->id] = $obj->name;
+        }
+
+        return $result;
     }
 }

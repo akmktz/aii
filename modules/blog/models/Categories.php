@@ -33,11 +33,10 @@ class Categories extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'alias'], 'required'],
-            [['text'], 'string'],
+            [['name', 'alias', 'date', 'text'], 'required'],
             [['status'], 'integer'],
             [['date'], 'date', 'format' => 'php:d.m.Y'],
-            [['name', 'alias'], 'string', 'min' => 3, 'max' => 255],
+            [['name', 'alias', 'text'], 'string', 'min' => 3, 'max' => 255],
             [['alias'], 'unique'],
         ];
     }

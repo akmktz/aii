@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\blog\models\PostsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Posts';
+$this->title = 'Посты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posts-index">
@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //'category',
             [
                 'filter' => $categories,
                 'attribute' => 'category',
@@ -33,16 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->category0->name;
                 }
             ],
-            //[
-            //    'attribute' => 'category',
-            //    'format' => 'html',
-            //    'value' => function($data) {
-            //        return Html::a(
-            //            \yii\helpers\StringHelper::truncate(strip_tags($data->category), 30, '...'),
-            //            ['update', 'id' => $data->id]
-            //        );
-            //    }
-            //],
             [
                 'attribute' => 'name',
                 'format' => 'html',
@@ -107,22 +96,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ],
     ]); ?>
-    <?php //= GridView::widget([
-    //    'dataProvider' => $dataProvider,
-    //    'filterModel' => $searchModel,
-    //    'columns' => [
-    //        ['class' => 'yii\grid\SerialColumn'],
-    //
-    //        'id',
-    //        'name',
-    //        'alias',
-    //        'text:ntext',
-    //        'status',
-    //        'date',
-    //        'category',
-    //        'tags',
-    //
-    //        ['class' => 'yii\grid\ActionColumn'],
-    //    ],
-    //]); ?>
 </div>

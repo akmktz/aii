@@ -15,8 +15,6 @@ use dosamigos\datetimepicker\DateTimePicker;
 
     <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?php //= $form->field($model, 'date')->textInput() ?>
-
     <?= $form->field($model, 'date')->widget(DateTimePicker::className(), [
         'language' => 'ru',
         'size' => 'ms',
@@ -42,7 +40,8 @@ use dosamigos\datetimepicker\DateTimePicker;
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить',
+                                ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

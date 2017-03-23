@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\blog\models\CategoriesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Категории';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="categories-index">
@@ -50,45 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     );
                 }
             ],
-            //[
-            //    'attribute' => 'status',
-            //    'filter' => [1 => 'Да', 0 => 'Нет'],
-            //    'contentOptions' => ['align' => 'center'],
-            //    'format' => 'raw',
-            //    'value' => function($data) {
-            //        return Html::a(
-            //                //$data->status ? 'Да' : 'Нет',
-            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
-            //                    ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]),
-            //                '#',
-            //                ['class' => 'js-publish-change-link', 'data-id' => $data->id]
-            //            );
-            //    }
-            //],
             [
                 'attribute' => 'date',
                 'format' => ['date', 'php:d.m.Y'],
              ],
-            //[
-            //    'class' => 'yii\grid\ActionColumn',
-            //    'template' => '{status} {update} {delete}',
-            //    'buttons' => [
-            //        'update' => function ($url, $data) {
-            //            return Html::a(
-            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
-            //                $url,
-            //                ['class' => 'text-info']
-            //            );
-            //        },
-            //        'delete' => function ($url, $data) {
-            //            return Html::a(
-            //                Html::tag('span', null, ['class' => 'glyphicon glyphicon-trash']),
-            //                $url,
-            //                ['class' => 'text-danger']
-            //            );
-            //        }
-            //    ],
-            //],
             [
                 'attribute' => 'status',
                 'filter' => [1 => 'Да', 0 => 'Нет'],
