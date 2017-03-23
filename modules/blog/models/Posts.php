@@ -2,7 +2,6 @@
 
 namespace app\modules\blog\models;
 
-use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 
@@ -95,7 +94,7 @@ class Posts extends \yii\db\ActiveRecord
     public function listCategories()
     {
         $result = [null => '-- Не указана --'];
-        $temp = Categories::find()->orderBy('name')->all();
+        $temp = Categories::find()->where('status = 1')->orderBy('name')->all();
         foreach ($temp as $obj) {
             $result[$obj->id] = $obj->name;
         }

@@ -46,6 +46,7 @@ $config = [
                 '/admin/' => 'admin/default/index',
                 '/admin/login' => 'admin/default/login',
                 '/admin/logout' => 'admin/default/logout',
+                '/admin/set_status' => 'admin/default/set-status',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>' => '<module>/admin/<controller>',
                 //'admin/<action:[\w]+>' => 'admin/default/<action>',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>/<id>' => '<module>/admin/<controller>/<action>',

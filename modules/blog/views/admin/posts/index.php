@@ -10,10 +10,11 @@ use yii\grid\GridView;
 $this->title = 'Посты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="posts-index">
+<div class="posts-index js-status-config"
+     data-table-name="<?= $searchModel::tableName(); ?>"
+     data-class-on="glyphicon-ok-circle text-success" data-class-off="glyphicon-ban-circle text-warning" >
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Новый пост', ['create'], ['class' => 'btn btn-success']) ?>
@@ -75,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
                                 ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]),
                             '#',
-                            ['class' => 'js-publish-change-link', 'data-id' => $data->id]
+                            ['class' => 'js-status-switch', 'data-id' => $data->id, 'data-status' => $data->status]
                         ) . Html::a(
                             Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
                             ['update', 'id' => $data->id],
