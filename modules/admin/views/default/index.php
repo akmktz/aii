@@ -1,12 +1,10 @@
 <div class="admin-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+    <h1>Админ панель</h1>
     <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
+        Здесь вы можете управлять разделами:
+        <li><?= \yii\helpers\Html::a('Категории', '/admin/blog/categories'); ?></li>
+        <li><?= \yii\helpers\Html::a('Посты', '/admin/blog/posts'); ?></li>
+        <li><?= \yii\helpers\Html::a('Комментарии', '/admin/blog/comments'); ?></li>
     </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+
 </div>

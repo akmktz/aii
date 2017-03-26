@@ -52,10 +52,13 @@ $config = [
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>/<id>' => '<module>/admin/<controller>/<action>',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>' => '<module>/admin/<controller>/<action>',
 
-                '/' => 'site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',
                 'login' => 'site/login',
+                'logout' => 'site/logout',
+                '/' => 'blog/default/index',
+                '/<groupAlias>' => 'blog/default/group',
+                '/<groupAlias>/<postAlias>' => 'blog/default/post',
             ],
         ],
         'formatter' => [
