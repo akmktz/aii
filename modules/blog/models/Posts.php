@@ -35,13 +35,13 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'alias', 'category', 'date', 'text'], 'required'],
+            [['name', 'alias', 'category_id', 'date', 'text'], 'required'],
             [['tags'], 'string'],
-            [['status', 'category'], 'integer'],
+            [['status', 'category_id'], 'integer'],
             [['date'], 'date', 'format' => 'php:d.m.Y'],
             [['name', 'alias', 'text'], 'string', 'min' => 3, 'max' => 255],
             [['alias'], 'unique'],
-            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'id']],
         ];
     }
 
@@ -78,6 +78,7 @@ class Posts extends \yii\db\ActiveRecord
             'text' => 'Текст',
             'status' => 'Опубликовано',
             'date' => 'Дата публикации',
+            'category_id' => 'Категория',
             'category' => 'Категория',
             'tags' => 'Теги',
         ];
@@ -86,9 +87,17 @@ class Posts extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory0()
+    public function getCategory()
     {
-        return $this->hasOne(Categories::className(), ['id' => 'category']);
+        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoryName()
+    {
+        return $this->category->name;
     }
 
     public function listCategories()

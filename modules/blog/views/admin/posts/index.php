@@ -27,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             [
                 'filter' => $categories,
-                'attribute' => 'category',
+                'attribute' => 'category_id',
                 'format' => 'raw',
                 'value' => function($data) {
-                    return $data->category0->name;
+                    return $data->categoryName;
                 }
             ],
             [

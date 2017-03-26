@@ -20,7 +20,7 @@ class PostsSearch extends Posts
     public function rules()
     {
         return [
-            [['id', 'status', 'category'], 'integer'],
+            [['id', 'status', 'category_id'], 'integer'],
             [['name', 'alias', 'text', 'date', 'tags'], 'safe'],
         ];
     }
@@ -43,7 +43,7 @@ class PostsSearch extends Posts
      */
     public function search($params)
     {
-        $query = Posts::find()->with('category0');
+        $query = Posts::find()->with('category');
 
         // add conditions that should always apply here
 
@@ -64,7 +64,7 @@ class PostsSearch extends Posts
             'id' => $this->id,
             'status' => $this->status,
             'date' => $this->date,
-            'category' => $this->category,
+            'category_id' => $this->category_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
@@ -77,13 +77,13 @@ class PostsSearch extends Posts
 
     public function getCategoriesList() {
         $result = [];
-        $temp = Posts::find()->with('category0')->all();
+        $temp = Posts::find()->with('category')->all();
         if (count($temp)) {
             foreach ($temp as $obj) {
-                if (!$obj->category0 && is_object($obj->category0)) {
+                if (!$obj->category && is_object($obj->category)) {
                     continue;
                 }
-                $result[$obj->category0->id] = $obj->category0->name;
+                $result[$obj->category->id] = $obj->category->name;
             }
         }
 

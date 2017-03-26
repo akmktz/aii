@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?= $form->field($model, 'category')->dropDownList($model->listCategories()) ?>
+    <?= $form->field($model, 'category_id')->dropDownList($model->listCategories()) ?>
 
     <?= $form->field($model, 'date')->widget(\dosamigos\datetimepicker\DateTimePicker::className(), [
         'language' => 'ru',
