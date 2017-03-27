@@ -18,4 +18,16 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
             </li>
         <?php endforeach; ?>
     </ul>
+
+    Оставить комментарий:
+
+    <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+    <?= $form->field($model, 'post_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'text')->textarea(['rows' => 6, 'maxlength' => true]) ?>
+    <div class="form-group">
+        <?= \yii\helpers\Html::submitButton('Добавить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+    <?php \yii\widgets\ActiveForm::end(); ?>
 </div>

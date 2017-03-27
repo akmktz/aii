@@ -85,6 +85,17 @@ class DefaultController extends Controller
             ->andWhere('status = 1')
             ->orderBy('date DESC')
             ->all();
-        return $this->render('post', compact('group', 'post', 'result'));
+
+        $model = new Comments();
+        $postResult = $model->load(\Yii::$app->request->post());
+        $model->post_id = $post->id;
+        $model->date = date('d.m.Y');
+        $model->status = 0;
+        if ($postResult && $model->save()) {
+            return $this->redirect(['post', 'groupAlias' => $group->alias, 'postAlias' => $post->alias]);
+            //return $this->render('post', compact('group', 'post', 'result', 'model'));
+        } else {
+            return $this->render('post', compact('group', 'post', 'result', 'model'));
+        };
     }
 }
