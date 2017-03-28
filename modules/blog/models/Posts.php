@@ -39,7 +39,8 @@ class Posts extends \yii\db\ActiveRecord
             [['tags'], 'string'],
             [['status', 'category_id'], 'integer'],
             [['date'], 'date', 'format' => 'php:d.m.Y'],
-            [['name', 'alias', 'text'], 'string', 'min' => 3, 'max' => 255],
+            [['name', 'alias'], 'string', 'min' => 3, 'max' => 255],
+            [['text'], 'string', 'min' => 3, 'max' => 1024],
             [['alias'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'id']],
         ];

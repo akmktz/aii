@@ -2,6 +2,7 @@
 
 namespace app\modules\blog\controllers;
 
+use app\CMS\CController;
 use app\modules\blog\models\Categories;
 use app\modules\blog\models\Comments;
 use app\modules\blog\models\Posts;
@@ -11,23 +12,15 @@ use yii\web\NotFoundHttpException;
 /**
  * Default controller for the `modulesblog` module
  */
-class DefaultController extends Controller
+class DefaultController extends CController
 {
-
-    public function beforeAction($action)
-    {
-        //$this->homeLink = '/admin/';
-
-        $result = parent::beforeAction($action);
-        return $result;
-    }
     /**
      * Renders the index view for the module
      * @return string
      */
     public function actionIndex()
     {
-        $result = Categories::find()->where('status = 1')->orderBy('name')->all();
+        $result = Categories::find()->where('status = 1')->andWhere('date <= now()')->orderBy('name')->all();
         return $this->render('index', compact('result'));
     }
 
@@ -41,6 +34,7 @@ class DefaultController extends Controller
     {
         $group = Categories::find()
             ->where(['alias' => $groupAlias])
+            ->andWhere('date <= now()')
             ->andWhere('status = 1')
             ->one();
         if (!$group) {
@@ -49,6 +43,7 @@ class DefaultController extends Controller
 
         $result = Posts::find()
             ->where(['category_id' => $group->id])
+            ->andWhere('date <= now()')
             ->andWhere('status = 1')
             ->orderBy('date DESC')
             ->all();
@@ -66,6 +61,7 @@ class DefaultController extends Controller
     {
         $group = Categories::find()
             ->where(['alias' => $groupAlias])
+            ->andWhere('date <= now()')
             ->andWhere('status = 1')
             ->one();
         if (!$group) {
@@ -74,6 +70,7 @@ class DefaultController extends Controller
 
         $post = Posts::find()
             ->where(['alias' => $postAlias])
+            ->andWhere('date <= now()')
             ->andWhere('status = 1')
             ->one();
         if (!$post) {

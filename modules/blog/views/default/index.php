@@ -4,14 +4,19 @@ $this->title = 'Категории';
 $this->params['homeLink'] = false;
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
-<div class="site-index">
-    <h1><?= $this->title; ?> </h1>
 
-    <ul>
-        <?php foreach($result as $obj): ?>
-            <li>
+<ul class="cols">
+    <?php foreach($result as $obj): ?>
+        <div class="col3 left">
+            <h2 class="label label-green">
                 <?= \yii\helpers\Html::a($obj->name, ['group', 'groupAlias' => $obj->alias]); ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</div>
+            </h2>
+            <p class="quiet large"><?= \yii\helpers\StringHelper::truncate(strip_tags($obj->text), 300, '...') ?></p>
+
+            <p>
+                <?= \yii\helpers\Html::a('Подробнее &raquo;', ['group', 'groupAlias' => $obj->alias], ['class' => "more"]); ?>
+            </p>
+        </div>
+    <?php endforeach; ?>
+    <div class="clearer">&nbsp;</div>
+</ul>
