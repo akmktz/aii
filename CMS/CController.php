@@ -78,7 +78,7 @@ class CController extends Controller
         foreach ($result as $obj) {
             $this->_mainComments[] = [
                 'name' => $obj->name,
-                'text' => \yii\helpers\StringHelper::truncate($obj->text, 27, '...'),
+                'text' => \yii\helpers\StringHelper::truncate($obj->text, 55, '...'),
             ];
         }
 
