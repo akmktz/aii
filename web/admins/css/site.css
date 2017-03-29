@@ -119,3 +119,7 @@ a.desc:after {
 .a-buttons-container a:first-child {
     margin-left: 0;
 }
+
+.mce-container {
+    border-radius: 4px;
+}

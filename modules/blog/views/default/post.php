@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
 <div class="post">
     <div class="post-body">
-        <p><?= nl2br($post->text); ?> </p>
+        <p><?= $post->text; ?> </p>
     </div>
     <div class="post-date"><?= nl2br($post->date); ?></div>
 </div>
