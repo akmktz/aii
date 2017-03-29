@@ -94,7 +94,7 @@ class CController extends Controller
         foreach ($result as $obj) {
             $tags .= ' ' . $obj->tags;
         }
-        $tags =  array_slice(explode(' ', trim($tags)), 0, 20);
+        $tags =  array_slice(array_unique(explode(' ', trim($tags))), 0, 20);
         $this->_mainTags = $tags;
 
         return parent::beforeAction($action);

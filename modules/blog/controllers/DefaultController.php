@@ -105,16 +105,17 @@ class DefaultController extends CController
     public function actionTag($tag = null)
     {
         $result = [];
+        setlocale(LC_ALL, 'ru_RU.UTF-8');
         if ($tag ||
                 (isset(\Yii::$app->request->post()['tag'])
-                    && ($tag = preg_replace('/\W/', '', \Yii::$app->request->post()['tag'])))
-            )
+                    && ($tag = preg_replace('/[^\w\s]/u', '', \Yii::$app->request->post()['tag'])) )
+           )
         {
             $result = Posts::find()
                 ->where('status = 1')
                 ->with('category')
                 ->andWhere('date <= now()')
-                ->andWhere('MATCH(tags) AGAINST (:tag IN BOOLEAN MODE) > 0', ['tag' => $tag])
+                ->andWhere('MATCH(tags) AGAINST (:tag) > 0', ['tag' => $tag])
                 ->all();
         }
 
