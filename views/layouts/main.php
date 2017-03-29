@@ -29,14 +29,18 @@ $this->beginPage()
     <div id="header">
         <div id="top">
             <div class="left" id="logo">
-                <a href="/"><img src="/img/logo.gif" alt="" /></a>
+                <?php if ($_SERVER['REQUEST_URI'] != '/'): ?>
+                    <a href="/"><img src="/img/logo.gif" alt="" /></a>
+                <?php else: ?>
+                    <span><img src="/img/logo.gif" alt="" /></span>
+                <?php endif; ?>
             </div>
             <div class="left navigation" id="main-nav">
                 <?php if (isset($this->context->_menu) && count($this->context->_menu)): ?>
                     <ul class="tabbed">
                         <?php foreach($this->context->_menu as $obj): ?>
                             <li class="<?= $obj['active'] ? 'current-tab' : '' ?>">
-                                <?= Html::a($obj['label'], $obj['url']) ?>
+                                <?= Html::a($obj['label'], $obj['active'] ? null : $obj['url']) ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -50,7 +54,7 @@ $this->beginPage()
                 <ul class="tabbed">
                     <?php foreach($this->context->_subMenu as $obj): ?>
                         <li class="<?= $obj['active'] ? 'current-tab' : '' ?>">
-                            <?= Html::a($obj['label'], $obj['url']) ?>
+                            <?= Html::a($obj['label'], $obj['active'] ? null : $obj['url']) ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -73,77 +77,64 @@ $this->beginPage()
         </div>
         <div class="right sidebar" id="sidebar">
             <div class="section">
-                <div class="section-title">Search</div>
+                <div class="section-title">Поиск по тегам</div>
                 <div class="section-content">
-                    <form method="post" action="">
-                        <input type="text" class="text" size="28" /> &nbsp; <input type="submit" class="button" value="Submit" />
-                    </form>
+                    <?php $form = \yii\widgets\ActiveForm::begin(['action' => '/tag']); ?>
+                        <?= \yii\helpers\Html::textInput('tag',
+                            isset(\Yii::$app->request->post()['tag']) ? \Yii::$app->request->post()['tag'] : '',
+                            ['maxlength' => 255, 'class' => 'text', 'size' => 28]); ?>
+                        &nbsp
+                        <?= \yii\helpers\Html::submitInput('Найти', ['class' => 'button']) ?>
+                    <?php \yii\widgets\ActiveForm::end(); ?>
                 </div>
             </div>
-            <div class="section">
-                <div class="section-title">Recent Entries</div>
-                <div class="section-content">
-                    <ul class="nice-list">
-                        <li>
-                            <div class="left"><a href="#">Aenean tempor arcu..</a></div>
-                            <div class="right">Oct 12</div>
-                            <div class="clearer">&nbsp;</div>
-                        </li>
-                        <li>
-                            <div class="left"><a href="#">Justo interdum rutrum</a></div>
-                            <div class="right">Sep 15</div>
-                            <div class="clearer">&nbsp;</div>
-                        </li>
-                        <li>
-                            <div class="left"><a href="#">In nec justo in urna</a></div>
-                            <div class="right">Sep 12</div>
-                            <div class="clearer">&nbsp;</div>
-                        </li>
-                        <li>
-                            <div class="left"><a href="#">Accumsan condimentum</a></div>
-                            <div class="right">Sep 6</div>
-                            <div class="clearer">&nbsp;</div>
-                        </li>
-                        <li>
-                            <div class="left"><a href="#">Etiam commodo bibendum</a></div>
-                            <div class="right">Aug 27</div>
-                            <div class="clearer">&nbsp;</div>
-                        </li>
-                        <li>
-                            <div class="left"><a href="#">Mauris euismod justo</a></div>
-                            <div class="right">Aug 21</div>
-                            <div class="clearer">&nbsp;</div>
-                        </li>
-                        <li><a href="#" class="more">Browse Archives &#187;</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="section">
-                <div class="section-title">Board of Members</div>
-                <div class="section-content">
-                    <ul class="nice-list">
-                        <li><a href="#">Elem Semper</a> <span class="quiet">- Director</span></li>
-                        <li><a href="#">Porttitor Urna</a> <span class="quiet">- Lead Writer</span></li>
-                        <li><a href="#">Congue Porttitor</a> <span class="quiet">- Editor</span></li>
-                        <li><a href="#">Etiam Blandit</a> <span class="quiet">- Writer</span></li>
-                        <li><a href="#">Diet Tesque</a> <span class="quiet">- Writer</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="section">
-                <div class="section-title">Topics</div>
-                <div class="section-content">
-                    <div class="quiet">
-                        <a href="#" style="font-size: 120%">vestibulum</a> <a href="#" style="font-size: 120%">ante</a> <a href="#" style="font-size: 150%">ipsum</a> <a href="#" style="font-size: 120%">faucibus</a> <a href="#" style="font-size: 90%">orci luctus</a> <a href="#" style="font-size: 80%">ultrices</a> <a href="#" style="font-size: 220%">posuere cubilia</a> <a href="#" style="font-size: 100%">curae</a> <a href="#" style="font-size: 110%">quisque</a> <a href="#" style="font-size: 150%">ut arcu</a> <a href="#" style="font-size: 140%">eros</a> <a href="#" style="font-size: 100%">vestibulum</a> <a href="#" style="font-size: 90%">dapibus</a> <a href="#" style="font-size: 120%">volutpat</a> <a href="#" style="font-size: 200%">elementum</a>
+            <?php if (isset($this->context->_mainPosts) && count($this->context->_mainPosts)): ?>
+                <div class="section">
+                    <div class="section-title">Выборочные посты</div>
+                    <div class="section-content">
+                        <ul class="nice-list">
+                            <?php foreach($this->context->_mainPosts as $obj): ?>
+                            <?php if ($obj['active']) continue; ?>
+                                <li>
+                                    <div class="left"><?= Html::a($obj['label'], $obj['url']) ?></div>
+                                    <div class="right"><?= date('d.m.y', strtotime($obj['date'])) ?></div>
+                                    <div class="clearer">&nbsp;</div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
+            <?php if (isset($this->context->_mainComments) && count($this->context->_mainComments)): ?>
+                <div class="section">
+                    <div class="section-title">Выборочные комментарии</div>
+                    <div class="section-content">
+                        <ul class="nice-list">
+                            <?php foreach($this->context->_mainComments as $obj): ?>
+                                <li><span><?= $obj['name'] ?></span> <span class="quiet">- <?= $obj['text'] ?></span></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($this->context->_mainTags) && count($this->context->_mainTags)): ?>
+                <div class="section">
+                    <div class="section-title">Выборочные теги</div>
+                    <div class="section-content">
+                        <div class="quiet">
+                            <?php foreach($this->context->_mainTags as $tag): ?>
+                                <a href="/tag/<?= $tag ?>" style="font-size: <?= rand(100, 200) ?>%"><?= $tag ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="clearer">&nbsp;</div>
     </div>
     <div id="footer">
         <div class="left" id="footer-left">
-            <img src="img/logo-small.gif" alt="" class="left" />
+            <img src="/img/logo-small.gif" alt="" class="left" />
             <p>&copy; 2002-2009 Simple Organization. All rights Reserved</p>
             <p class="quiet"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></p>
             <div class="clearer">&nbsp;</div>
@@ -155,7 +146,7 @@ $this->beginPage()
                         <?php if ($obj['active']): ?>
                             <strong>
                         <?php endif; ?>
-                                <?= Html::a($obj['label'], $obj['url']) ?>
+                                <?= Html::a($obj['label'], $obj['active'] ? null : $obj['url']) ?>
                         <?php if ($obj['active']): ?>
                             </strong>
                         <?php endif; ?>
@@ -164,90 +155,11 @@ $this->beginPage()
                     <a href="#top" class="quiet">Page Top &uarr;</a>
                 </p>
             <?php endif; ?>
+            <p><?= Yii::powered() ?></p>
         </div>
         <div class="clearer">&nbsp;</div>
     </div>
 </div>
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage() ?>
-
-
-
-<?php return; // --------------------------------------------------------------------------------------------- ?> ?>
-
-<?php
-
-/* @var $this \yii\web\View */
-/* @var $content string */
-
-
-AppAsset::register($this);
-?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php $this->beginBody() ?>
-
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Миниблог',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Категории', 'url' => '/'],
-            ['label' => 'О проекте', 'url' => ['/site/about']],
-            ['label' => 'Контакты', 'url' => ['/site/contact']],
-            !Yii::$app->user->isGuest ? ['label' => 'Админка', 'url' => ['/admin']] : '',
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            ),
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'homeLink' => isset($this->params['homeLink']) ? $this->params['homeLink'] : null,
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
-</div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>

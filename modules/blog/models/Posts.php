@@ -40,7 +40,7 @@ class Posts extends \yii\db\ActiveRecord
             [['status', 'category_id'], 'integer'],
             [['date'], 'date', 'format' => 'php:d.m.Y'],
             [['name', 'alias'], 'string', 'min' => 3, 'max' => 255],
-            [['text'], 'string', 'min' => 3, 'max' => 1024],
+            [['text'], 'string', 'min' => 3],
             [['alias'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'id']],
         ];
@@ -104,7 +104,7 @@ class Posts extends \yii\db\ActiveRecord
     public function listCategories()
     {
         $result = [null => '-- Не указана --'];
-        $temp = Categories::find()->where('status = 1')->orderBy('name')->all();
+        $temp = Categories::find()->where('status = 1')->andWhere('date <= now()')->orderBy('name')->all();
         foreach ($temp as $obj) {
             $result[$obj->id] = $obj->name;
         }

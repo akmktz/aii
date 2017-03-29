@@ -59,24 +59,44 @@ class CommentsSearch extends Comments
         }
 
         $dataProvider->sort->attributes['postName'] = [
-            'asc' => ['blog_posts.name' => SORT_ASC],
-            'desc' => ['blog_posts.name' => SORT_DESC],
+            'asc' => [Posts::tableName() . '.name' => SORT_ASC],
+            'desc' => [Posts::tableName() . '.name' => SORT_DESC],
             'label' => 'Пост'
         ];
 
         // grid filtering conditions
+        $table = Comments::tableName();
+
         $query->andFilterWhere([
-            'id' => $this->id,
+            $table . '.id' => $this->id,
             'post_id' => $this->post_id,
-            'date' => $this->date,
-            'status' => $this->status,
+            $table . '.status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'text', $this->text]);
+        $this->date = trim($this->date);
+
+        if (preg_match('/^\d{1,2}\.\d{1,2}\.\d{2,4}$/', $this->date)
+            && $date = \DateTime::createFromFormat('d.m.Y', $this->date))
+        {
+            $query->andFilterWhere(['>=', $table . '.date', $date->format('Y-m-d')])
+                ->andFilterWhere(['<=', $table . '.date', $date->format('Y-m-d')]);
+        }
+        if (preg_match('/^\d{1,2}\.\d{1,2}\.\d{2,4}\s*-\s*\d{1,2}\.\d{1,2}\.\d{2,4}$/', $this->date)
+            && count($date = explode('-', $this->date, 2)) == 2)
+        {
+            if (($date1 = \DateTime::createFromFormat('d.m.Y', trim($date[0])))
+                && ($date2 = \DateTime::createFromFormat('d.m.Y', trim($date[1]))))
+            {
+                $query->andFilterWhere(['>=', $table . '.date', $date1->format('Y-m-d')])
+                    ->andFilterWhere(['<=', $table . '.date', $date2->format('Y-m-d')]);
+            }
+        }
+
+        $query->andFilterWhere(['like', $table . '.name', $this->name])
+            ->andFilterWhere(['like', $table . '.email', $this->email])
+            ->andFilterWhere(['like', $table . '.text', $this->text]);
         $query->joinWith(['post' => function ($q) {
-            $q->where('blog_posts.name LIKE "%' . $this->postName . '%"');
+            $q->where(Posts::tableName() . '.name LIKE "%' . $this->postName . '%"');
         }]);
 
         return $dataProvider;

@@ -64,7 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'date',
                 'format' => ['date', 'php:d.m.Y'],
             ],
-            'tags',
+            [
+                'attribute' => 'tags',
+                'enableSorting' => false,
+            ],
             [
                 'attribute' => 'status',
                 'filter' => [1 => 'Да', 0 => 'Нет'],

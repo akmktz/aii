@@ -95,4 +95,29 @@ class DefaultController extends CController
             return $this->render('post', compact('group', 'post', 'result', 'model'));
         };
     }
+
+    /**
+     * Renders the group view for the module
+     * @param string $groupAlias
+     * @throws NotFoundHttpException if the model cannot be found
+     * @return string
+     */
+    public function actionTag($tag = null)
+    {
+        $result = [];
+        if ($tag ||
+                (isset(\Yii::$app->request->post()['tag'])
+                    && ($tag = preg_replace('/\W/', '', \Yii::$app->request->post()['tag'])))
+            )
+        {
+            $result = Posts::find()
+                ->where('status = 1')
+                ->with('category')
+                ->andWhere('date <= now()')
+                ->andWhere('MATCH(tags) AGAINST (:tag IN BOOLEAN MODE) > 0', ['tag' => $tag])
+                ->all();
+        }
+
+        return $this->render('tag', compact('tag', 'result'));
+    }
 }

@@ -1,11 +1,10 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = $group->name;
+$this->title = 'Поиск по тегам: ' . $tag;
 $this->params['homeLink'] = false;
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => '/'];
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
-<p><?= $group->text; ?> </p>
 <ul>
     <?php foreach($result as $obj): ?>
         <div class="post">
@@ -16,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
             <div class="archive-post-title">
                 <h3>
                     <?= \yii\helpers\Html::a($obj->name . ' (' . $obj->date . ')',
-                        ['post', 'groupAlias' => $group->alias, 'postAlias' => $obj->alias]); ?>
+                        ['post', 'groupAlias' => $obj->category->alias, 'postAlias' => $obj->alias]); ?>
                 </h3>
                 <div class="post-date"><?= \yii\helpers\StringHelper::truncate($obj->text ,150 ,'...') ?></div>
             </div>

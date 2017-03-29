@@ -28,7 +28,7 @@ AdminAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Миниблог',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => '/',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
