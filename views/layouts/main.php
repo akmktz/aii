@@ -111,7 +111,11 @@ $this->beginPage()
                     <div class="section-content">
                         <ul class="nice-list">
                             <?php foreach($this->context->_mainComments as $obj): ?>
-                                <li><span><?= $obj['name'] ?></span> <span class="quiet">- <?= $obj['text'] ?></span></li>
+                                <?php if ($obj['active']) continue; ?>
+                                <li>
+                                    <span><?= $obj['name'] ?></span>
+                                    <span class="quiet">- <?= Html::a($obj['text'], $obj['url']) ?></span>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

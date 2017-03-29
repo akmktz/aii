@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
             <div class="comment-profile-wrapper left">
                 <div class="comment-profile">
                     <div class="comment-gravatar"><img src="/img/sample-gravatar.gif" width="40" height="40" alt="Your gravatar" /></div>
-                    <div class="comment-author">Your Name</div>
+                    <div class="comment-author"></div>
                 </div>
             </div>
             <div class="comment-content-wrapper">

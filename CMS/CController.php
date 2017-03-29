@@ -26,6 +26,8 @@ class CController extends Controller
             ['label' => 'Админка', 'url' => '/admin'],
         ];
 
+        $actionMethod = \Yii::$app->requestedAction->actionMethod;
+
         foreach ($this->_menu as &$obj) {
             $obj['active'] =
                 (strpos($_SERVER['REQUEST_URI'], Url::to($obj['url'])) !== false && Url::to($obj['url']) != '/')
@@ -41,11 +43,11 @@ class CController extends Controller
             ->orderBy('name')
             ->all();
         foreach ($result as $obj) {
-            $url = ['group', 'groupAlias' => $obj->alias];
+            $url = Url::to(['group', 'groupAlias' => $obj->alias]);
             $this->_subMenu[] = [
                 'label' => $obj->name,
                 'url' => $url,
-                'active' => strpos($_SERVER['REQUEST_URI'], Url::to($url)) !== false,
+                'active' => strpos($_SERVER['REQUEST_URI'], $url) !== false && $actionMethod == 'actionGroup',
             ];
         }
 
@@ -57,28 +59,36 @@ class CController extends Controller
             ->limit(6)
             ->orderBy('Rand()')
             ->all();
+
+
         foreach ($result as $obj) {
-            $url = ['post', 'groupAlias' => $obj->category->alias, 'postAlias' => $obj->alias];
+            $url = Url::to(['post', 'groupAlias' => $obj->category->alias, 'postAlias' => $obj->alias]);
             $this->_mainPosts[] = [
                 'label' => $obj->name,
-                'date' => $obj->date,
                 'url' => $url,
-                'active' => strpos($_SERVER['REQUEST_URI'], Url::to($url)) !== false,
+                'date' => $obj->date,
+                'active' => strpos($_SERVER['REQUEST_URI'], $url) !== false && $actionMethod == 'actionPost',
             ];
         }
 
         // Comments
         $result = Comments::find()
             ->with('post')
+            ->with('post.category')
             ->where('status = 1')
             ->andWhere('date <= now()')
             ->limit(6)
             ->orderBy('Rand()')
             ->all();
         foreach ($result as $obj) {
+            $url = Url::to(['post', 'groupAlias' => $obj->post->category->alias, 'postAlias' => $obj->post->alias])
+                   . '#comment-' . $obj->id;
             $this->_mainComments[] = [
+                'id' => $obj->id,
                 'name' => $obj->name,
+                'url' => $url,
                 'text' => \yii\helpers\StringHelper::truncate($obj->text, 55, '...'),
+                'active' => strpos($_SERVER['REQUEST_URI'], $url) !== false && $actionMethod == 'actionPost',
             ];
         }
 
