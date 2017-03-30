@@ -5,7 +5,7 @@ $this->params['homeLink'] = false;
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => '/'];
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
-<p><?= \yii\helpers\HtmlPurifier::process($group->text); ?> </p>
+<p><?= trim(\yii\helpers\HtmlPurifier::process($group->text)); ?> </p>
 <ul>
     <?php foreach($result as $obj): ?>
         <div class="post">

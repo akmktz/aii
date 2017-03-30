@@ -5,7 +5,7 @@ $this->params['homeLink'] = false;
 $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => '/'];
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
-<p><?= \yii\helpers\HtmlPurifier::process($page->text); ?> </p>
+<p><?= trim(\yii\helpers\HtmlPurifier::process($page->text)); ?></p>
 <br>
 <div class="comment-body contact-form">
     <h3>Контактная форма</h3>

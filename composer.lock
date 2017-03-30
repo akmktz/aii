@@ -567,16 +567,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "4.5.5",
+            "version": "4.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "d6dda8ceadf741fce2cf808790080a589877d6e6"
+                "reference": "87a20625963d051cce993130c6d8ebd5fbc96314"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/d6dda8ceadf741fce2cf808790080a589877d6e6",
-                "reference": "d6dda8ceadf741fce2cf808790080a589877d6e6",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/87a20625963d051cce993130c6d8ebd5fbc96314",
+                "reference": "87a20625963d051cce993130c6d8ebd5fbc96314",
                 "shasum": ""
             },
             "type": "component",
@@ -609,7 +609,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2017-03-07T13:29:55+00:00"
+            "time": "2017-03-30T13:48:40+00:00"
         },
         {
             "name": "yiisoft/yii2",

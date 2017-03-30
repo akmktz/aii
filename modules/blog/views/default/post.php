@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
 <div class="post">
     <div class="post-body">
-        <p><?= \yii\helpers\HtmlPurifier::process($post->text); ?> </p>
+        <p><?= trim(\yii\helpers\HtmlPurifier::process($post->text)); ?> </p>
     </div>
     <div class="post-date"><?= $post->date; ?></div>
 </div>
