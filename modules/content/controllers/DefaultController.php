@@ -28,6 +28,12 @@ class DefaultController extends CController
      * Renders the index view for the module
      * @return string
      */
+
+    public function actionError()
+    {
+        return $this->render($this->action->id, ['page' => $this->_page]);
+    }
+
     public function actionAbout()
     {
         return $this->render($this->action->id, ['page' => $this->_page]);
