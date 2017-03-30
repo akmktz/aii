@@ -37,6 +37,7 @@ class Comments extends \yii\db\ActiveRecord
     {
         return [
             [['post_id', 'name', 'text', 'email'], 'required'],
+            ['name', 'match', 'pattern' => '/^[А-я\w][А-я\w\s]*$/u'],
             [['post_id', 'status'], 'integer'],
             [['date'], 'safe'],
             [['email'], 'email'],
