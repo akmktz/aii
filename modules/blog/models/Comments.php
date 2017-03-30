@@ -5,6 +5,7 @@ namespace app\modules\blog\models;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "blog_comments".
@@ -80,6 +81,18 @@ class Comments extends \yii\db\ActiveRecord
                 },
             ],
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $purifier = new HtmlPurifier();
+            $this->name  = $purifier->process($this->name, ['HTML.Allowed' => '']);
+            $this->text  = $purifier->process($this->text, ['HTML.Allowed' => '']);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

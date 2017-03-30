@@ -8,9 +8,9 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
 <div class="post">
     <div class="post-body">
-        <p><?= $post->text; ?> </p>
+        <p><?= \yii\helpers\HtmlPurifier::process($post->text); ?> </p>
     </div>
-    <div class="post-date"><?= nl2br($post->date); ?></div>
+    <div class="post-date"><?= $post->date; ?></div>
 </div>
 <div class="archive-separator"></div>
 <?php if(count($result)): ?>
