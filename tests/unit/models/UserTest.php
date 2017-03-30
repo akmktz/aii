@@ -1,6 +1,6 @@
 <?php
 namespace tests\models;
-use app\models\User;
+use app\modules\admin\models\User;
 
 class UserTest extends \Codeception\Test\Unit
 {

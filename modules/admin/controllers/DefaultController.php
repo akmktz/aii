@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\LoginForm;
+use app\modules\admin\models\LoginForm;
 use app\CMS\AdminController;
 use yii\web\Response;
 
