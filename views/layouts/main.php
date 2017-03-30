@@ -139,7 +139,7 @@ $this->beginPage()
     <div id="footer">
         <div class="left" id="footer-left">
             <img src="/img/logo-small.gif" alt="" class="left" />
-            <p>&copy; 2002-2009 Simple Organization. All rights Reserved</p>
+            <p>&copy; 2002-<?= date('Y') ?> Simple Organization. All rights Reserved</p>
             <p class="quiet"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a></p>
             <div class="clearer">&nbsp;</div>
         </div>

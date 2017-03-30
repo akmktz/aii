@@ -59,7 +59,10 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
 <div id="respond">
     <ul>
         <li>
-            <div class="legend" id="comment-form-title">Оставить отзыв</div>
+            <div class="legend" id="comment-form-title">
+                Оставить отзыв
+                <div class="premoder">Внимание! На сайте действует премодерация.</div>
+            </div>
             <div class="comment-profile-wrapper left">
                 <div class="comment-profile">
                     <div class="comment-gravatar"><img src="/img/sample-gravatar.gif" width="40" height="40" alt="Your gravatar" /></div>

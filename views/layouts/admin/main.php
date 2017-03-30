@@ -67,7 +67,7 @@ AdminAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; 2002-<?= date('Y') ?> Simple Organization. All rights Reserved</p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

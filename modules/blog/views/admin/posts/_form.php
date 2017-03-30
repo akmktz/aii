@@ -44,7 +44,7 @@ use yii\widgets\ActiveForm;
             'class' => 'form-control',
             'classes' => 'form-control',
             'plugins' => [
-                "advlist autolink lists link charmap print preview anchor",
+                "advlist autolink lists charmap print preview anchor", //link
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table contextmenu paste "
             ],
