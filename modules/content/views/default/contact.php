@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
         <div class="form-rows">
             <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className()) ?>
         </div>
+        <div class="form-rows-submit">
         <?= \yii\helpers\Html::submitButton('Отправить', ['class' => 'contact-submit-btn']) ?>
     </fieldset>
     <?php \yii\widgets\ActiveForm::end(); ?>

@@ -271,6 +271,11 @@ form .required {font-weight: bold;}
 
 .form-error {border-color: #F00;}
 .form-rows {padding: 5px 0;}
+.form-rows-submit {
+	border-top: 1px solid #DDD;
+	padding: 13px 0 10px 0;
+	margin-top: 10px;
+}
 .form-row-submit {
 	border-top: 1px solid #DDD;
 	padding: 8px 0 10px 76px;
