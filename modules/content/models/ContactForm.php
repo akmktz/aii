@@ -2,6 +2,7 @@
 
 namespace app\modules\content\models;
 
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
 use Yii;
 use yii\base\Model;
 use yii\helpers\HtmlPurifier;
@@ -13,8 +14,9 @@ class ContactForm extends Model
 {
     public $name;
     public $email;
+    public $phone;
     public $text;
-    public $verifyCode;
+    public $reCaptcha;
 
 
     /**
@@ -23,10 +25,15 @@ class ContactForm extends Model
     public function rules()
     {
         return [
-            [['name', 'email', 'text'], 'required'],
+            [['name', 'email', 'phone', 'text'], 'required'],
+            ['name', 'match', 'pattern' => '/^[А-я\w][А-я\w\s]*$/u'],
+            ['name', 'string', 'min' => 2, 'max' => 50],
             ['email', 'email'],
-            // verifyCode needs to be entered correctly
-            //['verifyCode', 'captcha'],
+            ['phone', 'match', 'pattern' => '/^\+38\(\d{3}\)\d{3}-\d{2}-\d{2}$/',
+                            'message' => 'Введите номер телефона в формате: +38(xxx)xxx-xx-xx'],
+            ['phone', 'string'],
+            ['text', 'string', 'min' => 10],
+            //[['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6Lce8hoUAAAAAIyRqPV93o2wUIBptpcL5xHvYdPa']
         ];
     }
 
@@ -36,10 +43,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Имя',
+            'name'  => 'Имя',
             'email' => 'E-Mail',
-            'text' => 'Сообщение',
-            'verifyCode' => 'Капча',
+            'phone' => 'Телефон',
+            'text'  => 'Сообщение',
+            'reCaptcha' => 'Капча',
         ];
     }
 
@@ -51,11 +59,14 @@ class ContactForm extends Model
     public function contact($email)
     {
         if ($this->validate()) {
+            $site = Yii::$app->name . ' - ' . $_SERVER['HTTP_HOST'];
+            $text = HtmlPurifier::process($this->text, ['HTML.Allowed' => '']);
+            $message = "Сообщение из контактной формы сайта: $site\nИмя: $this->name\nE-Mail: $this->email\nТелефон: $this->phone\nТекст: $text";
             Yii::$app->mailer->compose()
                 ->setTo($email)
-                ->setFrom([$this->email => $this->name])
-                ->setSubject('Сообщение из контактной формы сайта: ' . Yii::$app->name . ' - ' . $_SERVER['HTTP_HOST'])
-                ->setTextBody(HtmlPurifier::process($this->text))
+                ->setFrom(['wztmpml@mail.ru' => $this->name . " ($this->email)"])
+                ->setSubject("Сообщение из контактной формы сайта: $site")
+                ->setTextBody($message)
                 ->send();
 
             return true;

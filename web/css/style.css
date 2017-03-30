@@ -270,7 +270,7 @@ input.button:active {border-style: inset;}
 form .required {font-weight: bold;}
 
 .form-error {border-color: #F00;}
-.form-row {padding: 5px 0;}
+.form-rows {padding: 5px 0;}
 .form-row-submit {
 	border-top: 1px solid #DDD;
 	padding: 8px 0 10px 76px;

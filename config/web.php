@@ -24,10 +24,16 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.mail.ru',
+                'username' => 'wztmpml@mail.ru',
+                'password' => '7BzY$N0dhj',
+                //'port' => '587',
+                //'encryption' => 'tls',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -65,7 +71,13 @@ $config = [
             'dateFormat' => 'php:d-M-Y',
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'timeFormat' => 'php:H:i:s',
-        ]
+        ],
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6Lce8hoUAAAAAKmKPqNxdXWMvnwllGqGo0p2Vzc-',
+            'secret' => '6Lce8hoUAAAAAIyRqPV93o2wUIBptpcL5xHvYdPa',
+        ],
     ],
     'params' => $params,
     'modules' => [

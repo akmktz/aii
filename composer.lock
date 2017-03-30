@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fa8e5675f54fe99edbd93f0cdca21f3",
+    "content-hash": "d96e74bf7c8f07c9d2953852cde93c94",
     "packages": [
         {
             "name": "2amigos/yii2-date-time-picker-widget",
@@ -462,6 +462,54 @@
                 "html"
             ],
             "time": "2017-03-13T06:30:53+00:00"
+        },
+        {
+            "name": "himiklab/yii2-recaptcha-widget",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/himiklab/yii2-recaptcha-widget.git",
+                "reference": "6c7c6c41a595f8fdcc5ec54e5f09a332ef0358cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/himiklab/yii2-recaptcha-widget/zipball/6c7c6c41a595f8fdcc5ec54e5f09a332ef0358cc",
+                "reference": "6c7c6c41a595f8fdcc5ec54e5f09a332ef0358cc",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/dbunit": ">=1.2",
+                "phpunit/phpunit": ">=3.7",
+                "phpunit/phpunit-selenium": ">=1.2"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "himiklab\\yii2\\recaptcha\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HimikLab",
+                    "homepage": "https://github.com/himiklab/"
+                }
+            ],
+            "description": "Yii2 Google reCAPTCHA widget",
+            "keywords": [
+                "captcha",
+                "google",
+                "recaptcha",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-01-10T15:46:29+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

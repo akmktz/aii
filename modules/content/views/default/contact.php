@@ -9,17 +9,20 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
     <div class="comment-body contact-form">
         <?php $form = \yii\widgets\ActiveForm::begin(); ?>
         <fieldset>
-            <div class="form-row">
+            <div class="form-rows">
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class' => 'text']); ?>
             </div>
-            <div class="form-row">
+            <div class="form-rows">
+                <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'class' => 'text']); ?>
+            </div>
+            <div class="form-rows">
                 <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class' => 'text']); ?>
             </div>
-            <div class="form-row">
+            <div class="form-rows">
                 <?= $form->field($model, 'text')->textarea(['rows' => 6, 'maxlength' => true]) ?>
             </div>
-            <div class="form-row">
-                <?= $form->field($model, 'verifyCode')->widget(\yii\captcha\Captcha::className()) ?>
+            <div class="form-rows">
+                <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className()) ?>
             </div>
             <?= \yii\helpers\Html::submitButton('Отправить', ['class' => 'contact-submit-btn']) ?>
         </fieldset>

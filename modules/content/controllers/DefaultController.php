@@ -36,13 +36,14 @@ class DefaultController extends CController
     public function actionContact()
     {
         $model = new ContactForm();
-        $model->name = 'test user';
-        $model->email = 'test@mail.ml';
-        $model->text = 'TEST TEST TEST';
+        //$model->name  = 'test юser';
+        //$model->email = 'test@mail.ml';
+        //$model->phone = '+38(050)-123-45-67';
+        //$model->text  = 'TEST TEST TEST';
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
-            return $this->refresh();
+            return $this->redirect(['contact']);
         }
         return $this->render($this->action->id, ['model' => $model, 'page' => $this->_page]);
     }
