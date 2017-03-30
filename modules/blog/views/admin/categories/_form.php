@@ -37,7 +37,20 @@ use dosamigos\datetimepicker\DateTimePicker;
     <?= $form->field($model, 'alias', ['template' => $this->renderFile('@app/views/parts/admin/aliasInput.php')])
              ->textInput(['class' => 'form-control js-alias-generate-alias']); ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'text')->widget(\dosamigos\tinymce\TinyMce::className() , [
+        'options' => ['rows' => 20],
+        'language' => 'ru',
+        'clientOptions' => [
+            'class' => 'form-control',
+            'classes' => 'form-control',
+            'plugins' => [
+                "advlist autolink lists charmap print preview anchor link",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste "
+            ],
+            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        ]
+    ]);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить',
