@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'class' => 'text-danger',
                                 'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'confirm' => 'Вы уверены, что хотите удалить этот элемент?',
                                     'method' => 'post',
                                 ],
                             ]

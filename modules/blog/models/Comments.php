@@ -2,6 +2,7 @@
 
 namespace app\modules\blog\models;
 
+use himiklab\yii2\recaptcha\ReCaptchaValidator;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
@@ -22,6 +23,7 @@ use yii\helpers\HtmlPurifier;
  */
 class Comments extends \yii\db\ActiveRecord
 {
+    public $reCaptcha;
     /**
      * @inheritdoc
      */
@@ -43,6 +45,7 @@ class Comments extends \yii\db\ActiveRecord
             [['email'], 'email'],
             [['name', 'text'], 'string', 'min' => 3, 'max' => 1024],
             [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Posts::className(), 'targetAttribute' => ['post_id' => 'id']],
+            [['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6Lce8hoUAAAAAIyRqPV93o2wUIBptpcL5xHvYdPa']
         ];
     }
 
@@ -60,6 +63,7 @@ class Comments extends \yii\db\ActiveRecord
             'text' => 'Текст',
             'date' => 'Дата',
             'status' => 'Опубликовано',
+            'reCaptcha' => 'Капча',
         ];
     }
 

@@ -89,6 +89,11 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                                     ['template' => $this->renderFile('@app/views/parts/commentInput.php')])
                                     ->textInput(['maxlength' => true, 'class' => 'text']); ?>
                             </div>
+                            <div class="form-row">
+                                <?= $form->field($model, 'reCaptcha',
+                                    ['template' => $this->renderFile('@app/views/parts/commentInput.php')])
+                                    ->widget(\himiklab\yii2\recaptcha\ReCaptcha::className()) ?>
+                            </div>
                             <div class="form-row form-row-submit">
                                 <?= \yii\helpers\Html::submitButton('Добавить') ?>
                             </div>

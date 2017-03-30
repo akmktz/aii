@@ -33,7 +33,7 @@ class ContactForm extends Model
                             'message' => 'Введите номер телефона в формате: +38(xxx)xxx-xx-xx'],
             ['phone', 'string'],
             ['text', 'string', 'min' => 10],
-            //[['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6Lce8hoUAAAAAIyRqPV93o2wUIBptpcL5xHvYdPa']
+            [['reCaptcha'], ReCaptchaValidator::className(), 'secret' => '6Lce8hoUAAAAAIyRqPV93o2wUIBptpcL5xHvYdPa']
         ];
     }
 
