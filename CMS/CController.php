@@ -43,7 +43,7 @@ class CController extends Controller
             ->orderBy('name')
             ->all();
         foreach ($result as $obj) {
-            $url = Url::to(['group', 'groupAlias' => $obj->alias]);
+            $url = Url::to(['/blog/default/group', 'groupAlias' => $obj->alias]);
             $this->_subMenu[] = [
                 'label' => $obj->name,
                 'url' => $url,
@@ -62,7 +62,7 @@ class CController extends Controller
 
 
         foreach ($result as $obj) {
-            $url = Url::to(['post', 'groupAlias' => $obj->category->alias, 'postAlias' => $obj->alias]);
+            $url = Url::to(['/blog/default/post', 'groupAlias' => $obj->category->alias, 'postAlias' => $obj->alias]);
             $this->_mainPosts[] = [
                 'label' => $obj->name,
                 'url' => $url,
@@ -81,7 +81,7 @@ class CController extends Controller
             ->orderBy('Rand()')
             ->all();
         foreach ($result as $obj) {
-            $url = Url::to(['post', 'groupAlias' => $obj->post->category->alias, 'postAlias' => $obj->post->alias])
+            $url = Url::to(['/blog/default/post', 'groupAlias' => $obj->post->category->alias, 'postAlias' => $obj->post->alias])
                    . '#comment-' . $obj->id;
             $this->_mainComments[] = [
                 'id' => $obj->id,

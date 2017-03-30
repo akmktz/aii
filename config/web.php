@@ -29,10 +29,8 @@ $config = [
                 'host' => 'smtp.mail.ru',
                 'username' => 'wztmpml@mail.ru',
                 'password' => '7BzY$N0dhj',
-                //'port' => '587',
-                //'encryption' => 'tls',
-                'port' => '465',
-                'encryption' => 'ssl',
+                'port' => '587',
+                'encryption' => 'tls',
             ],
         ],
         'log' => [
