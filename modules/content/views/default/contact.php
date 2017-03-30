@@ -6,26 +6,28 @@ $this->params['breadcrumbs'][] = ['label' => 'Категории', 'url' => '/']
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 ?>
 <p><?= \yii\helpers\HtmlPurifier::process($page->text); ?> </p>
-    <div class="comment-body contact-form">
-        <?php $form = \yii\widgets\ActiveForm::begin(); ?>
-        <fieldset>
-            <div class="form-rows">
-                <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class' => 'text']); ?>
-            </div>
-            <div class="form-rows">
-                <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'class' => 'text']); ?>
-            </div>
-            <div class="form-rows">
-                <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class' => 'text']); ?>
-            </div>
-            <div class="form-rows">
-                <?= $form->field($model, 'text')->textarea(['rows' => 6, 'maxlength' => true]) ?>
-            </div>
-            <div class="form-rows">
-                <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className()) ?>
-            </div>
-            <?= \yii\helpers\Html::submitButton('Отправить', ['class' => 'contact-submit-btn']) ?>
-        </fieldset>
-        <?php \yii\widgets\ActiveForm::end(); ?>
-    </div>
-    <div class="clearer">&nbsp;</div>
+<br>
+<div class="comment-body contact-form">
+    <h3>Контактная форма</h3>
+    <?php $form = \yii\widgets\ActiveForm::begin(); ?>
+    <fieldset>
+        <div class="form-rows">
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class' => 'text']); ?>
+        </div>
+        <div class="form-rows">
+            <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'class' => 'text']); ?>
+        </div>
+        <div class="form-rows">
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class' => 'text']); ?>
+        </div>
+        <div class="form-rows">
+            <?= $form->field($model, 'text')->textarea(['rows' => 6, 'maxlength' => true]) ?>
+        </div>
+        <div class="form-rows">
+            <?= $form->field($model, 'reCaptcha')->widget(\himiklab\yii2\recaptcha\ReCaptcha::className()) ?>
+        </div>
+        <?= \yii\helpers\Html::submitButton('Отправить', ['class' => 'contact-submit-btn']) ?>
+    </fieldset>
+    <?php \yii\widgets\ActiveForm::end(); ?>
+</div>
+<div class="clearer">&nbsp;</div>
