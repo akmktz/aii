@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'filter' => [1 => 'Да', 0 => 'Нет'],
+                'options' => ['style' => 'width: 65px; max-width: 65px;'],
                 'contentOptions' => ['align' => 'center', 'class' => 'a-buttons-container'],
                 'format' => 'raw',
                 'value' => function($data) {

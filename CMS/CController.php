@@ -21,8 +21,8 @@ class CController extends Controller
         // Menu
         $this->_menu = [
             ['label' => 'Категории', 'url' => '/'],
-            ['label' => 'О проекте', 'url' => '/site/about'],
-            ['label' => 'Контакты', 'url' => '/site/contact'],
+            ['label' => 'О проекте', 'url' => '/about'],
+            ['label' => 'Контакты', 'url' => '/contact'],
             ['label' => 'Админка', 'url' => '/admin'],
         ];
 

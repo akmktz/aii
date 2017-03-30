@@ -90,7 +90,6 @@ class DefaultController extends CController
         $model->status = 0;
         if ($postResult && $model->save()) {
             return $this->redirect(['post', 'groupAlias' => $group->alias, 'postAlias' => $post->alias]);
-            //return $this->render('post', compact('group', 'post', 'result', 'model'));
         } else {
             return $this->render('post', compact('group', 'post', 'result', 'model'));
         };

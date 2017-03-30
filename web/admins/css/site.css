@@ -123,3 +123,16 @@ a.desc:after {
 .mce-container {
     border-radius: 4px;
 }
+
+.admin-default-index span {
+    font-size: 110%;
+}
+
+.admin-default-index ul {
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.admin-default-index li {
+    margin-bottom: 5px;
+}

@@ -90,8 +90,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title];
                                     ->textInput(['maxlength' => true, 'class' => 'text']); ?>
                             </div>
                             <div class="form-row form-row-submit">
-                                <?= \yii\helpers\Html::submitButton('Добавить',
-                                    ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                                <?= \yii\helpers\Html::submitButton('Добавить') ?>
                             </div>
                         </fieldset>
                     <?php \yii\widgets\ActiveForm::end(); ?>

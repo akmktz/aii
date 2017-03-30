@@ -51,8 +51,8 @@ $config = [
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>/<id>' => '<module>/admin/<controller>/<action>',
                 'admin/<module:[\w-]+>/<controller:[\w-]+>/<action:[\w]+>' => '<module>/admin/<controller>/<action>',
 
-                'about' => 'site/about',
-                'contact' => 'site/contact',
+                'about' => 'content/default/about',
+                'contact' => 'content/default/contact',
                 '/' => 'blog/default/index',
                 '/tag' => 'blog/default/tag',
                 '/tag/<tag>' => 'blog/default/tag',
@@ -74,6 +74,9 @@ $config = [
         ],
         'blog' => [
             'class' => 'app\modules\blog\Module',
+        ],
+        'content' => [
+            'class' => 'app\modules\content\Module',
         ],
     ],
 ];

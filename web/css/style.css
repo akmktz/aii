@@ -402,6 +402,16 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 .archive-post-day {font: normal 1.6em Georgia,serif;}
 
 
+.contact-form input, .contact-form textarea {
+	width: 580px;
+	display: block;
+}
+
+.contact-submit-btn {
+	width: 200px;
+	margin-bottom: 10px;
+}
+
 /* 
    Comments 
 ------------------------------------------------------------------- */

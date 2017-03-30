@@ -4,35 +4,24 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\blog\models\PostsSearch */
+/* @var $searchModel app\modules\content\models\PagesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Посты';
+$this->title = 'Управление страницами';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="posts-index js-status-config"
+<div class="pages-index js-status-config"
      data-table-name="<?= $searchModel::tableName(); ?>"
      data-class-on="glyphicon-ok-circle text-success" data-class-off="glyphicon-ban-circle text-warning" >
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Новый пост', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            [
-                'filter' => $categories,
-                'attribute' => 'category_id',
-                'format' => 'raw',
-                'value' => function($data) {
-                    return $data->categoryName;
-                }
-            ],
             [
                 'attribute' => 'name',
                 'format' => 'html',
@@ -48,25 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false,
                 'enableSorting' => false,
                 'format' => 'ntext',
-            ],
-            [
-                'attribute' => 'text',
-                'enableSorting' => false,
-                'format' => 'html',
-                'value' => function($data) {
-                    return Html::a(
-                        \yii\helpers\StringHelper::truncate(strip_tags($data->text), 47, '...'),
-                        ['update', 'id' => $data->id]
-                    );
-                }
-            ],
-            [
-                'attribute' => 'date',
-                'format' => ['date', 'php:d.m.Y'],
-            ],
-            [
-                'attribute' => 'tags',
-                'enableSorting' => false,
             ],
             [
                 'attribute' => 'status',
@@ -85,16 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
                             ['update', 'id' => $data->id],
                             ['class' => 'text-info']
-                        ) . Html::a(
-                            Html::tag('span', null, ['class' => 'glyphicon glyphicon-trash']),
-                            ['delete', 'id' => $data->id],
-                            [
-                                'class' => 'text-danger',
-                                'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
-                                    'method' => 'post',
-                                ],
-                            ]
                         );
                 }
             ],
