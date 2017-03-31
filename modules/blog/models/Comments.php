@@ -23,6 +23,8 @@ use yii\helpers\HtmlPurifier;
  */
 class Comments extends \yii\db\ActiveRecord
 {
+    const SCENARIO_ADMIN = 'admin';
+
     public $reCaptcha;
     /**
      * @inheritdoc
@@ -30,6 +32,13 @@ class Comments extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'blog_comments';
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_ADMIN] = ['id', 'post_id', 'name', 'email', 'text', 'date', 'status'];
+        return $scenarios;
     }
 
     /**

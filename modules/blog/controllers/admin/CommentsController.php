@@ -53,6 +53,7 @@ class CommentsController extends AdminController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Comments::SCENARIO_ADMIN;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->id]);
