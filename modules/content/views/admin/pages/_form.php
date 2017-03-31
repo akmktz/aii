@@ -14,10 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->checkbox() ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true , 'class' => 'form-control js-alias-generate-source']) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true , 'class' => 'form-control']) ?>
 
-    <?= $form->field($model, 'alias', ['template' => $this->renderFile('@app/views/parts/admin/aliasInput.php')])
-                    ->textInput(['class' => 'form-control js-alias-generate-alias']); ?>
+    <?= $form->field($model, 'alias')->textInput(['class' => 'form-control', 'readonly' => 'true']); ?>
 
     <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
 
@@ -27,23 +26,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'keywords')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'text')->widget(\dosamigos\tinymce\TinyMce::className() , [
-        'options' => ['rows' => 20],
-        'language' => 'ru',
-        'clientOptions' => [
-            'class' => 'form-control',
-            'classes' => 'form-control',
-            'plugins' => [
-                "advlist autolink lists charmap print preview anchor link",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste spellchecker"
-            ],
-            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-        ]
-    ]);?>
+    <?= $form->field($model, 'text')->widget(\dosamigos\tinymce\TinyMce::className());?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

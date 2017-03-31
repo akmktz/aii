@@ -46,11 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function($data) {
                     return
-                        Html::a(
-                            Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
-                                ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]),
-                            '#',
-                            ['class' => 'js-status-switch', 'data-id' => $data->id, 'data-status' => $data->status]
+                        Html::tag('span', null, ['class' => 'glyphicon glyphicon-' .
+                            ($data->status ? 'ok-circle text-success' : 'ban-circle text-warning')]
                         ) . Html::a(
                             Html::tag('span', null, ['class' => 'glyphicon glyphicon-pencil']),
                             ['update', 'id' => $data->id],
