@@ -165,6 +165,18 @@ $this->beginPage()
     </div>
 </div>
 <?php $this->endBody() ?>
+<?php if (count(Yii::$app->session->allFlashes)): ?>
+    <script>
+        $.jGrowl.defaults.closer = false;
+        $.jGrowl.defaults.check = 150;
+        $.jGrowl.defaults.life = 5000;
+        <?php foreach(Yii::$app->session->getAllFlashes() as $type => $messages): ?>
+            <?php foreach($messages as $message): ?>
+                $.jGrowl('<?= $message ?>');
+            <?php endforeach ?>
+        <?php endforeach ?>
+    </script>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endPage() ?>

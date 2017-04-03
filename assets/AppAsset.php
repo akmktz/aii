@@ -19,7 +19,11 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/style.css',
+        //'css/jquery.jgrowl.css',
+        'css/jquery.jgrowl.min.css',
     ];
-    public $js = [];
+    public $js = [
+        'js/jquery.jgrowl.min.js',
+    ];
     public $depends = [];
 }

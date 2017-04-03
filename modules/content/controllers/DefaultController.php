@@ -44,10 +44,10 @@ class DefaultController extends CController
         $model = new ContactForm();
         //$model->name  = 'test юser';
         //$model->email = 'test@mail.ml';
-        //$model->phone = '+38(050)-123-45-67';
+        //$model->phone = '+38(050)123-45-67';
         //$model->text  = 'TEST TEST TEST';
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+            Yii::$app->session->addFlash('info', 'Сообщение отравлено');
 
             return $this->redirect(['contact']);
         }

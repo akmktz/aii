@@ -89,6 +89,8 @@ class DefaultController extends CController
         $model->date = date('d.m.Y');
         $model->status = 0;
         if ($postResult && $model->save()) {
+            \Yii::$app->session->addFlash('info', 'Отзыв добавлен. Он будет показан когда его проверит администратор.');
+
             return $this->redirect(['post', 'groupAlias' => $group->alias, 'postAlias' => $post->alias]);
         } else {
             return $this->render('post', compact('group', 'post', 'result', 'model'));
