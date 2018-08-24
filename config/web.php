@@ -73,8 +73,8 @@ $config = [
         'reCaptcha' => [
             'name' => 'reCaptcha',
             'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
-            'siteKey' => '6Lce8hoUAAAAAKmKPqNxdXWMvnwllGqGo0p2Vzc-',
-            'secret' => '6Lce8hoUAAAAAIyRqPV93o2wUIBptpcL5xHvYdPa',
+            'siteKey' => '6LcKDmwUAAAAAHCwE-FW7rW9Xx3OTkXqzzx7Zc5n',
+            'secret' => '6LcKDmwUAAAAAK5mZyDSmdh79-RswN1V1Lho6miu',
         ],
     ],
     'params' => $params,
